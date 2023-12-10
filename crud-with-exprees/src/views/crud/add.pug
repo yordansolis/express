@@ -1,0 +1,24 @@
+doctype
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title=title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+        h1 Agregando contacto...           
+          div.class-btn-add
+            a.class-add(href="/api/users") Atras
+        
+        form.class-form-post(action="/api/users", method="post")
+            label(for="name") Name: 
+            input(type="text", id="name" name="name")     
+
+            label(for="email") Email: 
+            input(type="email", id="email" name="email")   
+
+            label(for="phone") Phone: 
+            input(type="number", id="phone" name="phone")   
+
+            input.class-add(type="submit", value='Enviar')
+        

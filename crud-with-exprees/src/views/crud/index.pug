@@ -1,0 +1,55 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Crud Express 
+        link(rel='stylesheet', href='/stylesheets/style.css')
+
+    body 
+       h1  Contactos
+       div.class-btn-add
+        a.class-add(href="/api/add") Agregar nuevo contacto
+
+       div.class-flex
+        each user in users
+            div.class-card
+                li=user.id_user  
+                li=user.name
+                li=user.email
+                li=user.phone
+                div.class-button
+                    button(class="delete-btn class-delete", data-id=user.id_user) Eliminar
+
+
+                    // Agregar el script
+    script.
+      const deleteButtons = document.querySelectorAll('.delete-btn');
+
+        deleteButtons.forEach(button => {
+          button.addEventListener('click', (event) => {
+            const userId = event.target.dataset.id;  
+            
+            console.log("ID del usuario:", userId);
+
+        
+          if (confirm('¿Estás seguro de eliminar este usuario?')) {
+            fetch(`/api/user/${userId}`, {
+              method: 'delete'
+            })
+            .then(response => {
+              if (response.ok) {
+                console.log(`Usuario con ID ${userId} eliminado correctamente.`);
+                location.reload();
+              } else {
+                console.error('Error al eliminar el usuario.');
+              }
+            })
+            .catch(error => {
+              console.error('Error de red al eliminar el usuario:', error);
+            });
+          }
+        });
+      });   
+
+
